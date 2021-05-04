@@ -1,8 +1,10 @@
 h1{
     color: cornflowerblue;
-    float: left;
+    display: flex;
+    justify-content: flex-start;
 }
 h2{
     color:Cornflowerblue;
-    float: right;
+    display: flex;
+    justify-content: flex-end;
 }

@@ -13,19 +13,26 @@
 
 <body>
     <header class="">
-        <h1 class=""><a href="">View Highscores</a></h1>
-        <h2 class="">Timer:</h2>
+        <h1 class="" id="highscores-link"><button onclick=""></button></h1>
+        <h2 class="" id="time-container">Timer:<span id="timer"></span></h2>
     </header>
     <main>
         <section class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-8 col-lg-6">
                     <h3 class="row justify-content-center" id="question">Code Quiz</h3>
-                    <p>
-                        Description of the game
-                    </p>
+                    <div id="answers" class="container"></div>
                     <button id="start" onclick=genQuestion()>Start</button>
                 </div>
+                <h3 id="result"></h3>
+            </div>
+        </section>
+        <section hidden class="container" id="scoreboard">
+            <div class="row justify-content-center">
+                <h3>Highscores</h3>
+                <ul id="scores">
+                    
+                </ul>
             </div>
         </section>
     </main>

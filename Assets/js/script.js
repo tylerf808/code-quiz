@@ -7,8 +7,10 @@ const timer = document.getElementById('timer');
 const timeContainer = document.getElementById('time-container')
 const highscoresLink = document.getElementById('highscores-link')
 const scoreboard = document.getElementById('scoreboard')
+const scores = document.getElementById('scores')
+
+const submit = document.getElementById('inputInitials')
 var timeLeft = 80;
-const scores = [];
 
 function countdown() {
 
@@ -21,11 +23,6 @@ function countdown() {
             clearInterval(timeInterval);
         }
     }, 1000);
-}
-
-
-function scoreboard() {
-    scoreboard.setAttribute('hidden', '')
 }
 
 document.addEventListener('click', (event) => {
@@ -50,7 +47,7 @@ let currentQuestion = 0;
 const questions = ['What does HTML stand for?', 'Who invented javascript?', 'What does CSS stand for?', 'When does UNIX time start?'];
 
 //Function that generates the next question from the question array
-const genQuestion = () => {
+const genQuestion = async () => {
     if (currentQuestion == 0) {
         countdown()
     }
@@ -58,32 +55,32 @@ const genQuestion = () => {
         display.innerHTML = questions[currentQuestion];
         genAnswers();
     } else {
-        endScreen()
+        await inputScore()
     }
 }
 
+//Function to bring up prompt for initials
+const inputScore = () => {
+    $("#gameboard").remove();
+    $('#highscores-link').remove();
+    $('#time-container').remove()
+    submit.removeAttribute('hidden');
+}
+
+const submitScore = () => {
+    const input = document.getElementById('initials')
+    const score = timeLeft;
+    const initials = input.value + " - " + score;
+    const newScore = document.createElement('li');
+    newScore.innerHTML = initials;
+    scores.appendChild(newScore);
+    endScreen()
+}
 
 //Function to generate end screen
-const endScreen = () => {
-    highscoresLink.innerHTML = ''
-    display.innerHTML = 'Game Over!'
-    answers.innerHTML = 'Enter your initials:'
-    timeContainer.innerHTML = ''
-    const inputField = document.createElement('input')
-    inputField.setAttribute('type', 'text')
-    inputField.setAttribute('id', 'initials')
-    const submitBtn = document.createElement('button')
-    submitBtn.setAttribute('onclick', 'submit()')
-    submitBtn.setAttribute('class', 'btn btn-primary')
-    submitBtn.innerHTML = 'Submit'
-    answers.appendChild(inputField)
-    answers.appendChild(submitBtn)
-    start.remove()
-    result.innerHTML = 'Your score is ' + timeLeft;
-    //Function for submitting a score
-    function submit() {
-        
-    }
+const endScreen = () => {;
+    $("#inputInitials").remove()
+    scoreboard.removeAttribute('hidden')
 }
 
 //Function that adds proper answer buttons for the question being displayed
